@@ -17,19 +17,24 @@ def getTimeDeff(form_url):
     datetime_local = dt.now()
     return (datetime_local.second-datetime_server.second)
 
+def login(login_url, driver):
+    
+
 # form.office.naver.com ip address
 # 210.89.164.67
-
+login_url = "https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com"
 form_url = 'https://form.office.naver.com/form/responseView.cmd?formkey=MGNjNjIxN2UtZmJiYy00ZmM4LWFlNGUtMTVlMmQ3ZTNkMDVh&sourceId=urlshare'
 
+# open chromedriver
 options = wd.ChromeOptions()
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-
 driver = wd.Chrome(executable_path='./chromedriver',chrome_options=options)
 
+# open browser
 driver.get(form_url)
 
+# click button
 btn1=driver.find_element_by_xpath('//*[@id="option_1"]/div[1]')
 
 btn2 = driver.find_element_by_xpath('//*[@id="option_2"]/div[1]')
@@ -45,9 +50,13 @@ btn2.click()
 btn3.click()
 btn4.click()
 
-# time_diff = getTimeDeff(form_url)
-# print(time_diff)
 
+# logic: 현재 서버 시간을 가져와 local 시간과 차이를 계산하여 submit
+# result: 
+# 해당 시점에서 local과의 차이를 계산 후 실행하면
+# 오랜 시간이 지난 후에는 n초 이상 차이가 벌어지기 때문에 좋은 방법이 아님.
+#
+# time_diff = getTimeDeff(form_url)
 # end = False
 # while not end : 
 #     tim = dt.now()
@@ -59,13 +68,14 @@ btn4.click()
 #         print('submit complete')
 #     else:
 #         time.sleep(0.1)
-#         print(tim + timedelta(seconds = time_diff))
 
+# logic: 0.1s 마다 서버로 request를 보냄
+# 
 end = False
 while not end :
     tim = dt.now()
     datetime_server = getServerTime(form_url)
-    if (datetime_server.second)>=59 and tim.microsecond>600000 :
+    if (datetime_server.second)>=59 and tim.microsecond>800000 :
         btn_submit.click()
         end = True
         print('local time : ',tim)
