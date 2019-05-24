@@ -17,11 +17,9 @@ def getTimeDeff(form_url):
     datetime_local = dt.now()
     return (datetime_local.second-datetime_server.second)
 
-def login(login_url, driver):
-    
-
 # form.office.naver.com ip address
 # 210.89.164.67
+
 login_url = "https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com"
 form_url = 'https://form.office.naver.com/form/responseView.cmd?formkey=MGNjNjIxN2UtZmJiYy00ZmM4LWFlNGUtMTVlMmQ3ZTNkMDVh&sourceId=urlshare'
 
