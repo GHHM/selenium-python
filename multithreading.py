@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup as bs
 import time
 import os
 import threading
@@ -8,6 +7,9 @@ import urllib.request
 
 from datetime import date, timedelta, datetime as dt
 from selenium import webdriver as wd
+
+SUBMIT_SECOND = 59
+MICRO_SECOND = 500000
 
 # global variable
 form_url = 'http://naver.me/G73wgGaT'
@@ -29,7 +31,7 @@ def getServerTime():
         global serverTime
         serverTime = datetime_server
         print(serverTime)
-        time.sleep(1)
+        time.sleep(0.1)
     #return datetime_server
 
 def submit(driver):
@@ -43,8 +45,8 @@ def timeCheck():
     while not end :
         tim = dt.now()
         #serverTime = getServerTime()
-        if serverTime.second>=59 and tim.microsecond>500000 :
-            print("Server Time : ", serverTime)
+        if serverTime.second>=SUBMIT_SECOND and tim.microsecond>MICRO_SECOND :
+            print("Server Time : ", serverTime, "   Local Time: ",tim.microsecond)
             return True
 
 def writeContents(driver):
@@ -88,7 +90,8 @@ if __name__=='__main__':
     t3 = threading.Thread(target=start_process, args=(ID,PW))
     t2 = threading.Thread(target=start_process, args=(ID,PW))
     t = threading.Thread(target=getServerTime,args=())
+
     t.start()
     t2.start()
     t3.start()
-    t3.join()
+    t.join()
