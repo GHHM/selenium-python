@@ -34,8 +34,8 @@ def getServerTime():
         time.sleep(0.1)
     #return datetime_server
 
-def submit(driver):
-    #driver.click()
+def submit(driver,btnSubmit):
+    btnSubmit.click()
     print("submit complete!")
     global isSubmit
     isSubmit = True
@@ -45,6 +45,7 @@ def timeCheck():
     while not end :
         tim = dt.now()
         #serverTime = getServerTime()
+        # 문제점 : 반을 SUBMIT_SECOND의 답을 못 받았을 경우 그냥 넘어감
         if serverTime.second>=SUBMIT_SECOND and tim.microsecond>MICRO_SECOND :
             print("Server Time : ", serverTime, "   Local Time: ",tim.microsecond)
             return True
@@ -83,10 +84,14 @@ def start_process(id, pw):
     #login(driver, id, pw)
     loadPage(driver)
     writeContents(driver)
+    btnSubmit = driver.find_element_by_xpath('//*[@id="pageNav"]/button[3]')
     timeCheck()
-    submit(driver)
+    submit(driver,btnSubmit)
 
 if __name__=='__main__':
+    t6 = threading.Thread(target=start_process, args=(ID,PW))
+    t5 = threading.Thread(target=start_process, args=(ID,PW))
+    t4 = threading.Thread(target=start_process, args=(ID,PW))
     t3 = threading.Thread(target=start_process, args=(ID,PW))
     t2 = threading.Thread(target=start_process, args=(ID,PW))
     t = threading.Thread(target=getServerTime,args=())
@@ -94,4 +99,6 @@ if __name__=='__main__':
     t.start()
     t2.start()
     t3.start()
-    t.join()
+    t4.start()
+    t5.start()
+    t6.start()
