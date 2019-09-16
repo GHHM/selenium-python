@@ -7,19 +7,21 @@
 ### 1. selenium
 `$pip install --upgrade pip`
 `$pip install selenium`
-[참고1](https://blog.naver.com/na_qa/221434084639)
+
+[참고](https://blog.naver.com/na_qa/221434084639)
 
 ### 2. anaconda
-[here](./anaconda.md)
+[자세히](./anaconda.md)
 
 ### 3. webdriver
-[chrome web driver](http://chromedriver.chromium.org/downloads)
+chrome web driver를 사용하였음 [자세히](http://chromedriver.chromium.org/downloads)
 
-## Crawling twitter data and visualize
-### 1, Ajax crawling
-웹툰 이미지 크롤링 [here](./beautiful_soup.py)
-### 2. pandas (visualize)
-data.csv, result.png (wordFrequency_from_twitter.py)
+## Crawling data and visualize
+### 1. Ajax crawling
+웹툰 이미지 크롤링 [code](./beautiful_soup.py)
+### 2. pandas
+twitter 크롤링하여 csv로 저장한 후 시각화
+data.csv, result.png [code](./wordFrequency_from_twitter.py)
 
 ## Project
 ### automated submit program
