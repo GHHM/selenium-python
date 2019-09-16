@@ -17,10 +17,10 @@
 
 ### Crawling twitter data and visualize
 #### Ajax crawling
-네이버 웹툰 이미지 크롤링 [here](./beautiful_soup.py)
+웹툰 이미지 크롤링 [here](./beautiful_soup.py)
 #### pandas (visualize)
 data.csv, result.png (wordFrequency_from_twitter.py)
 
 ## Selenium project
-### automate form submiting program
+### automated submit program
 [개발 로그](./development_log.md)
